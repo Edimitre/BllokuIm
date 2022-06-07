@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ProfileActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--TOOLBAR-->
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_toolbar"
+            android:background="?attr/colorPrimaryVariant"
+            android:elevation="12dp"
+            android:minHeight="?attr/actionBarSize">
+        </androidx.appcompat.widget.Toolbar>
+        <!--TOOLBAR END-->
+
+
+        <!--Layout-->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="1"
+            android:columnCount="1"
+            android:background="?attr/colorPrimary">
+
+
+            <!--MONTHLY EXPENSES CARD-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/monthly_expenses_card"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_height="20dp"
+                android:layout_margin="8sp"
+                android:backgroundTint="?attr/colorPrimaryVariant"
+                android:elevation="12dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/sample_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="shpenzimet kete muaj"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/monthly_expenses_size_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="14"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/sample_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/sample_text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="vlera shpenzuar"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/monthly_expenses_size_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/monthly_expenses_value_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4890"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/sample_text2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--YEARLY EXPENSES CARD-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/yearly_expenses_card"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_height="20dp"
+                android:layout_margin="8sp"
+                android:backgroundTint="?attr/colorPrimaryVariant"
+                android:elevation="12dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/sample1_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="shpenzimet kete vit"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/yearly_expenses_size_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="340"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/sample1_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/sample_text3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="vlera shpenzuar"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/yearly_expenses_size_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/yearly_expenses_value_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="48905"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/sample_text3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--MONTHLY INCOMES CARD-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/monthly_incomes_card"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_height="20dp"
+                android:layout_margin="8sp"
+                android:backgroundTint="?attr/colorPrimaryVariant"
+                android:elevation="12dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/sample2_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="te ardhurat mujore kete muaj"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/monthly_incomes_size_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/sample2_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/sample_text4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="vlera te ardhurave"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/monthly_incomes_size_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/monthly_incomes_value_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="48905"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/sample_text4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?colorOnSecondary"
+                        android:textStyle="bold"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--MONTHLY INCOMES CARD-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_card"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_height="20dp"
+                android:layout_margin="8sp"
+                android:backgroundTint="?attr/colorPrimaryVariant"
+                android:elevation="12dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="shiko te ardhurat"
+                        app:layout_constraintStart_toStartOf="@id/btn_go_monthly_incomes"
+                        app:layout_constraintBottom_toTopOf="@id/btn_go_monthly_incomes"
+                        app:layout_constraintEnd_toEndOf="@id/btn_go_monthly_incomes"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="15sp"
+                        android:textStyle="italic"/>
+                    <ImageView
+                        android:id="@+id/btn_go_monthly_incomes"
+                        android:layout_width="200dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_balance_wallet"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_watch_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="gjendja totale"
+                        android:src="@drawable/ic_balance_wallet"
+                        android:backgroundTint="?attr/colorPrimary"
+                        app:layout_constraintStart_toEndOf="@+id/btn_go_monthly_incomes"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="shiko balancen aktuale"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btn_go_monthly_incomes"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_watch_balance"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="15sp"
+                        android:textStyle="italic"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </GridLayout>
+
+
+
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

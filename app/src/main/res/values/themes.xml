@@ -1,0 +1,53 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.BllokuIm" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/base_color_day</item>
+        <item name="colorPrimaryVariant">@color/widget_color_day</item>
+        <item name="colorOnPrimary">@color/widget_color_day_2</item>
+
+
+        <!-- Secondary brand color. -->
+        <item name="colorOnSecondary">@color/text_day</item>
+
+
+
+        <!-- status bar theme -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+
+    <!--Material Dialog-->
+    <style name="ThemeOverlay.MaterialComponents.MaterialAlertDialog_Background" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <!-- Background Color-->
+        <item name="android:background">?attr/colorPrimary</item>
+        <!-- Text Color for title and message -->
+        <item name="colorOnSurface">?attr/colorOnPrimary</item>
+        <!-- Style for positive button -->
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <!-- Style for negative button -->
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="@style/Widget.MaterialComponents.Button">
+        <!-- text color for the button -->
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <!-- Background tint for the button -->
+        <item name="backgroundTint">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="@style/Widget.MaterialComponents.Button">
+        <!-- text color for the button -->
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <!-- Background tint for the button -->
+        <item name="backgroundTint">?attr/colorPrimary</item>
+    </style>
+
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">#333</item>
+        <item name="colorAccent">?attr/colorPrimaryVariant</item>
+    </style>
+</resources>

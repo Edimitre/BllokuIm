@@ -60,6 +60,18 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun getDailyReportDao(rDb: MyRoomDatabase): DailyReportDao {
+        return rDb.getDailyReportDao()
+    }
+
+    @Singleton
+    @Provides
+    fun getSettingsDao(rDb: MyRoomDatabase): SettingsDao {
+        return rDb.getSettingsDao()
+    }
+
+    @Singleton
+    @Provides
     fun getSystemService(context:Application): SystemService {
         return SystemService(context)
     }

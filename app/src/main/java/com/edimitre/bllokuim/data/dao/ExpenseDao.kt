@@ -24,6 +24,8 @@ interface ExpenseDao {
     @Query("SELECT COUNT(*) FROM expense_table where year = :year and month = :month and date =:date")
     fun getSizeOfExpenseListByYearMonthDate(year: Int, month: Int,date: Int): Flow<Int?>
 
+
+
     @Query("select * from expense_table where name LIKE '%' || :name || '%'")
     fun getAllExpensesByName(name: String): Flow<List<Expense?>?>?
 
@@ -38,6 +40,9 @@ interface ExpenseDao {
 
     @Query("SELECT SUM(spentValue) FROM expense_table WHERE year = :year and month = :month and date = :date")
     fun getValueOfExpenseListByYearMonthDate(year: Int, month: Int, date: Int): Flow<Int?>
+
+    @Query("SELECT SUM(spentValue) FROM expense_table WHERE year = :year and month = :month and date = :date")
+    fun getValueOfExpenseListByYearMonthDateOnThread(year: Int, month: Int, date: Int): Int?
 
     @Query("SELECT SUM(spentValue) FROM expense_table WHERE year = :year")
     fun getValueOfExpenseListByYear(year: Int): Flow<Int?>

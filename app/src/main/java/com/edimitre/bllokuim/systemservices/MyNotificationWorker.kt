@@ -6,20 +6,18 @@ import androidx.work.WorkerParameters
 import com.edimitre.bllokuim.data.utils.TimeUtils
 
 
-class MyBackGroundWorker(context: Context, workerParams: WorkerParameters) :
+class MyNotificationWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
 
     private val mySystemService: SystemService = SystemService(context)
 
     override fun doWork(): Result {
 
-        backUpDatabase()
-
         val hour: Int = TimeUtils().getCurrentHour()
 
         if (hour > 9) {
             mySystemService.notify(
-                "PersonalManager",
+                "BllokuIm",
                 "Ka ndonje shpenzim te harruar ?"
             )
         }
@@ -27,9 +25,6 @@ class MyBackGroundWorker(context: Context, workerParams: WorkerParameters) :
         return Result.success()
     }
 
-    private fun backUpDatabase() {
-        mySystemService.exportDatabase()
-    }
 
 
 }

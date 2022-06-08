@@ -49,6 +49,10 @@ interface MonthlyIncomeDao {
     @Query("SELECT SUM(value) FROM monthly_income_table WHERE year = :year and month = :month")
     fun getValueOfIncomesByYearMonth(year: Int, month: Int): Flow<Int?>
 
+    // mblidh shpenzimet e nje muaji te caktuar
+    @Query("SELECT SUM(value) FROM monthly_income_table WHERE year = :year and month = :month")
+    fun getValueOfIncomesByYearMonthOnThread(year: Int, month: Int): Int?
+
     @Query("SELECT COUNT(*) FROM monthly_income_table where year = :year and month = :month")
     fun getNrOfIncomesByMonth(year: Int, month: Int): Flow<Int?>
 

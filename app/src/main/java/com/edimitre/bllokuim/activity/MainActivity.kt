@@ -1,5 +1,6 @@
 package com.edimitre.bllokuim.activity
 
+import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
@@ -7,27 +8,30 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.edimitre.bllokuim.R
+import com.edimitre.bllokuim.data.dao.SettingsDao
 import com.edimitre.bllokuim.data.model.Description
 import com.edimitre.bllokuim.data.model.MainUser
 import com.edimitre.bllokuim.data.model.MonthlyIncomeType
+import com.edimitre.bllokuim.data.model.MyApplicationSettings
 import com.edimitre.bllokuim.data.viewModel.DescriptionViewModel
 import com.edimitre.bllokuim.data.viewModel.MainUserViewModel
 import com.edimitre.bllokuim.data.viewModel.MonthlyIncomeViewModel
-import com.edimitre.bllokuim.databinding.ActivityMainBinding
 import com.edimitre.bllokuim.fragment.AddUserForm
+import com.edimitre.bllokuim.fragment.SettingsForm
 import com.edimitre.bllokuim.systemservices.SystemService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
+import kotlin.concurrent.thread
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
+
 
     private lateinit var _userViewModel: MainUserViewModel
 
@@ -39,11 +43,14 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
 
     private var TAG = "BllokuIm => "
 
-    private var user:MainUser? = null
+    private var user: MainUser? = null
 
-    private var descriptions:List<Description?>? = null
+    private var descriptions: List<Description?>? = null
 
-    private var monthlyIncomeTypes:List<MonthlyIncomeType?>? = null
+    private var monthlyIncomeTypes: List<MonthlyIncomeType?>? = null
+
+    @Inject
+    lateinit var settingsDao: SettingsDao
 
     @Inject
     lateinit var systemService: SystemService
@@ -52,8 +59,6 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-
-        systemService.createNotificationChannel()
 
         initViewModel()
 
@@ -66,6 +71,14 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
         initDescriptions()
 
         initMonthlyIncomeTypes()
+
+        askForWritePermissions()
+
+        thread {
+            loadSettings()
+        }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -73,7 +86,6 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
         val inflater = menuInflater
         inflater.inflate(R.menu.toolbar_menu, menu)
 
-        profileItem = menu!!.findItem(R.id.btn_toolbar_profile)
 
         return true
     }
@@ -82,15 +94,8 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
 
         when (item.itemId) {
 
-            R.id.btn_toolbar_profile -> {
-
-                if (hasUser()) {
-                    intent = Intent(this, ProfileActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    openRegisterDialog()
-                }
-
+            R.id.btn_settings -> {
+                openSettingsDialog()
             }
 
         }
@@ -125,64 +130,74 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
             startActivity(intent)
         }
 
-        expenses_card.setOnClickListener{
+        expenses_card.setOnClickListener {
 
-            if (descriptions!!.isNotEmpty()){
+            if (descriptions!!.isNotEmpty()) {
                 intent = Intent(this, ExpenseActivity::class.java)
                 startActivity(intent)
-            }else{
+            } else {
                 val dialog = AlertDialog.Builder(this)
 
                 dialog.setTitle("Ju lutem shtoni pershkrim!")
 
-                dialog.setMessage("Nuk mund te shtoni dot asnje shpenzim \n" +
-                        "pa pasur dicka qe e pershkruan !")
+                dialog.setMessage(
+                    "Nuk mund te shtoni dot asnje shpenzim \n" +
+                            "pa pasur dicka qe e pershkruan !"
+                )
 
-                dialog.setNegativeButton("Mbyll", DialogInterface.OnClickListener { _, i ->  })
+                dialog.setNegativeButton("Mbyll", DialogInterface.OnClickListener { _, i -> })
 
                 dialog.show()
             }
 
         }
 
-        reminder_card.setOnClickListener{
+        reminder_card.setOnClickListener {
             intent = Intent(this, ReminderActivity::class.java)
             startActivity(intent)
 
         }
+
+        profile_card.setOnClickListener {
+            if (hasUser()) {
+                intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+            } else {
+                openRegisterDialog()
+            }
+        }
     }
 
-    private fun initUser(){
-        _userViewModel.getUser().observe(this){
+    private fun initUser() {
+        _userViewModel.getUser().observe(this) {
             user = it
 
         }
 
     }
 
-    private fun initDescriptions(){
-        _descriptionViewModel.descriptionList.observe(this){
+    private fun initDescriptions() {
+        _descriptionViewModel.descriptionList.observe(this) {
             descriptions = it
         }
 
     }
 
-    private fun initMonthlyIncomeTypes(){
+    private fun initMonthlyIncomeTypes() {
 
-            _monthlyIncomeViewModel.allMonthlyIncomeTypes.observe(this){
-                monthlyIncomeTypes = it
+        _monthlyIncomeViewModel.allMonthlyIncomeTypes.observe(this) {
+            monthlyIncomeTypes = it
 
-                if (monthlyIncomeTypes.isNullOrEmpty()){
-                    Log.e(TAG, "initial data empty ..creating it", )
-                    _monthlyIncomeViewModel.insertMonthlyIncomeTypes()
-                }else{
-                    Log.e(TAG, "initial data exist ..skipping", )
+            if (monthlyIncomeTypes.isNullOrEmpty()) {
+                Log.e(TAG, "initial data empty ..creating it")
+                _monthlyIncomeViewModel.insertMonthlyIncomeTypes()
+                systemService.restartApp()
 
-                }
+            } else {
+                Log.e(TAG, "initial data exist ..skipping")
+
             }
-
-
-
+        }
 
     }
 
@@ -199,6 +214,19 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
 
     }
 
+    private fun openSettingsDialog() {
+        val settingsForm = SettingsForm()
+        settingsForm.show(supportFragmentManager, "settings")
+    }
+
+    private fun askForWritePermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            0
+        )
+    }
+
     // it gets fired from Add user form
     override fun addUser(mainUser: MainUser) {
 
@@ -206,5 +234,45 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
 
     }
 
-    // todo implement daily report
+    private fun loadSettings() {
+
+        systemService.createNotificationChannel()
+
+        val myApplicationSettings = settingsDao.getSettings()
+
+        when (myApplicationSettings) {
+            null -> {
+                saveDefaultSettings()
+            }
+        }
+
+
+        when {
+            myApplicationSettings!!.dailyReportGeneratorEnabled -> {
+                systemService.scheduleDailyReportAlarm()
+            }
+            myApplicationSettings.workerEnabled -> {
+                systemService.startNotificationWorker()
+            }
+            myApplicationSettings.backDbEnabled -> {
+                systemService.startDbBackupWorker()
+            }
+        }
+
+        Log.e(TAG, "setting loaded", )
+    }
+
+    private fun saveDefaultSettings() {
+
+        val mySettings = MyApplicationSettings(
+            0,
+            workerEnabled = false,
+            dailyReportGeneratorEnabled = false,
+            backDbEnabled = false
+        )
+
+
+        settingsDao.saveSettings(mySettings)
+
+    }
 }

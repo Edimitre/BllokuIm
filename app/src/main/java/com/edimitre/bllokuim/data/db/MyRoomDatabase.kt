@@ -11,7 +11,8 @@ import com.edimitre.bllokuim.data.model.*
 @Database(
     entities = [MainUser::class,Description::class,
         Expense::class,MonthlyIncome::class,
-        MonthlyIncomeType::class,Reminder::class], version = 1, exportSchema = false
+        MonthlyIncomeType::class,Reminder::class,DailyReport::class,
+               MyApplicationSettings::class], version = 1, exportSchema = false
 )
 abstract class MyRoomDatabase : RoomDatabase() {
 
@@ -20,6 +21,8 @@ abstract class MyRoomDatabase : RoomDatabase() {
     abstract fun getExpenseDao(): ExpenseDao
     abstract fun getMonthlyIncomeDao(): MonthlyIncomeDao
     abstract fun getReminderIncomeDao(): ReminderDao
+    abstract fun getDailyReportDao(): DailyReportDao
+    abstract fun getSettingsDao(): SettingsDao
 
     companion object {
 
@@ -33,7 +36,7 @@ abstract class MyRoomDatabase : RoomDatabase() {
                 instance = Room.databaseBuilder(
                     context.applicationContext,
                     MyRoomDatabase::class.java,
-                    "BllokuDatabase.db"
+                    "BllokuImDatabase.db"
                 )
                     .fallbackToDestructiveMigration()
                     .setJournalMode(JournalMode.TRUNCATE)

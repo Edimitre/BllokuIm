@@ -1,6 +1,5 @@
 package com.edimitre.bllokuim.data.utils
 
-import com.edimitre.bllokuim.data.model.Expense
 import java.util.*
 
 class TimeUtils {
@@ -89,13 +88,11 @@ class TimeUtils {
         return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 
-    fun setExpenseExecutionTime(expense: Expense){
+    fun getNrOfRemainingDaysOfActualMonth():Int{
 
-        expense.year = getCurrentYear()
-        expense.month = getCurrentMonth()
-        expense.date = getCurrentDate()
-        expense.hour = getCurrentHour()
-        expense.minute = getCurrentMinute()
+        val todayDate = getCurrentDate()
+        val nrOfDays = getNrOfDaysOfActualMonth()
+
+        return nrOfDays - todayDate
     }
-
 }

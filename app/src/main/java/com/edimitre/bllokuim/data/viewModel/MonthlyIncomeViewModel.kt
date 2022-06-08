@@ -1,21 +1,26 @@
 package com.edimitre.bllokuim.data.viewModel
 
 import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edimitre.bllokuim.data.model.MonthlyIncome
 import com.edimitre.bllokuim.data.model.MonthlyIncomeType
 import com.edimitre.bllokuim.data.service.MonthlyIncomeService
+import com.edimitre.bllokuim.data.utils.TimeUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class MonthlyIncomeViewModel @Inject constructor(private val monthlyIncomeService: MonthlyIncomeService) :
-    ViewModel() {
+    ViewModel(){
 
     var TAG = "BllokuIm =>"
+
     var allMonthlyIncomeTypes = monthlyIncomeService.allMonthlyIncomeTypes
 
     var monthlyIncomesList = monthlyIncomeService.monthlyIncomesList
@@ -64,6 +69,10 @@ class MonthlyIncomeViewModel @Inject constructor(private val monthlyIncomeServic
 
         monthlyIncomeService.deleteMonthlyIncome(monthlyIncome)
     }
+
+
+
+
 
 
 }

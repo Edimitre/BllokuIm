@@ -2,12 +2,10 @@ package com.edimitre.bllokuim
 
 
 import android.app.Application
-import com.edimitre.bllokuim.data.dao.DescriptionDao
-import com.edimitre.bllokuim.data.dao.ExpenseDao
+import com.edimitre.bllokuim.data.dao.*
 
-import com.edimitre.bllokuim.data.dao.MainUserDao
-import com.edimitre.bllokuim.data.dao.MonthlyIncomeDao
 import com.edimitre.bllokuim.data.db.MyRoomDatabase
+import com.edimitre.bllokuim.systemservices.SystemService
 
 import dagger.Module
 import dagger.Provides
@@ -52,6 +50,18 @@ object AppModule {
     @Provides
     fun getMonthlyIncomeDao(rDb: MyRoomDatabase): MonthlyIncomeDao {
         return rDb.getMonthlyIncomeDao()
+    }
+
+    @Singleton
+    @Provides
+    fun getReminderDao(rDb: MyRoomDatabase): ReminderDao {
+        return rDb.getReminderIncomeDao()
+    }
+
+    @Singleton
+    @Provides
+    fun getSystemService(context:Application): SystemService {
+        return SystemService(context)
     }
 
 }

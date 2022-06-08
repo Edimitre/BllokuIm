@@ -4,15 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.edimitre.bllokuim.data.dao.DescriptionDao
-import com.edimitre.bllokuim.data.dao.ExpenseDao
-import com.edimitre.bllokuim.data.dao.MainUserDao
-import com.edimitre.bllokuim.data.dao.MonthlyIncomeDao
+import com.edimitre.bllokuim.data.dao.*
 import com.edimitre.bllokuim.data.model.*
 
 
 @Database(
-    entities = [MainUser::class,Description::class,Expense::class,MonthlyIncome::class,MonthlyIncomeType::class], version = 1, exportSchema = false
+    entities = [MainUser::class,Description::class,
+        Expense::class,MonthlyIncome::class,
+        MonthlyIncomeType::class,Reminder::class], version = 1, exportSchema = false
 )
 abstract class MyRoomDatabase : RoomDatabase() {
 
@@ -20,6 +19,7 @@ abstract class MyRoomDatabase : RoomDatabase() {
     abstract fun getDescriptionDao(): DescriptionDao
     abstract fun getExpenseDao(): ExpenseDao
     abstract fun getMonthlyIncomeDao(): MonthlyIncomeDao
+    abstract fun getReminderIncomeDao(): ReminderDao
 
     companion object {
 

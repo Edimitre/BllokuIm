@@ -20,9 +20,11 @@ import com.edimitre.bllokuim.data.viewModel.MainUserViewModel
 import com.edimitre.bllokuim.data.viewModel.MonthlyIncomeViewModel
 import com.edimitre.bllokuim.databinding.ActivityMainBinding
 import com.edimitre.bllokuim.fragment.AddUserForm
+import com.edimitre.bllokuim.systemservices.SystemService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
@@ -43,11 +45,15 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
 
     private var monthlyIncomeTypes:List<MonthlyIncomeType?>? = null
 
+    @Inject
+    lateinit var systemService: SystemService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
+        systemService.createNotificationChannel()
 
         initViewModel()
 
@@ -138,6 +144,12 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
             }
 
         }
+
+        reminder_card.setOnClickListener{
+            intent = Intent(this, ReminderActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 
     private fun initUser(){
@@ -193,4 +205,6 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
         _userViewModel.saveUser(mainUser)
 
     }
+
+    // todo implement daily report
 }

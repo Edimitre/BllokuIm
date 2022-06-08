@@ -60,7 +60,6 @@ class SettingsForm : BottomSheetDialogFragment() {
         }
     }
 
-
     private fun setExistingValues() {
 
         val thread = Thread {
@@ -143,6 +142,5 @@ class SettingsForm : BottomSheetDialogFragment() {
 
         return hasIncomes
     }
-
 
 }

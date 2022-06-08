@@ -14,11 +14,12 @@ import com.edimitre.bllokuim.data.model.Expense
 import com.edimitre.bllokuim.data.utils.TimeUtils
 import com.edimitre.bllokuim.data.viewModel.DescriptionViewModel
 import com.edimitre.bllokuim.data.viewModel.ExpenseViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_expense.*
 
 @AndroidEntryPoint
-class AddExpenseForm : AppCompatDialogFragment() {
+class AddExpenseForm : BottomSheetDialogFragment() {
 
 
     private lateinit var _descriptionViewModel: DescriptionViewModel
@@ -30,10 +31,7 @@ class AddExpenseForm : AppCompatDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setStyle(
-            STYLE_NORMAL,
-            android.R.style.Theme_Black_NoTitleBar_Fullscreen
-        )
+
     }
 
     override fun onCreateView(

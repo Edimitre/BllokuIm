@@ -88,7 +88,7 @@ class DescriptionActivity : AppCompatActivity() ,DescriptionAdapter.OnDescriptio
         )
         dialog.setPositiveButton("Shto") { _, _ ->
 
-            val name = inputName.text.toString().trim()
+            val name = inputName.text.toString().trim().uppercase(Locale.getDefault())
             if (name.isNotEmpty()) {
                 val description = Description(0,name)
                 descriptionViewModel.saveDescription(description)

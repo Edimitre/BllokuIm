@@ -1,6 +1,5 @@
 package com.edimitre.bllokuim.systemservices
 
-import android.Manifest
 import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.app.AlarmManager
@@ -18,7 +17,6 @@ import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -119,7 +117,7 @@ class SystemService(private val context: Context) {
                 cal.timeInMillis,
                 pendingIntent
             )
-        }else{
+        } else {
             alarmManager.setExact(
                 AlarmManager.RTC,
                 cal.timeInMillis,
@@ -266,10 +264,9 @@ class SystemService(private val context: Context) {
 
     fun startDbBackupWorker() {
         val workRequest = PeriodicWorkRequest.Builder(
-            MyDbBackupWorker::class.java, 4,
+            MyDbBackupWorker::class.java, 12,
             TimeUnit.HOURS
         )
-            .setInitialDelay(30, TimeUnit.MINUTES)
             .build()
         val workManager = WorkManager.getInstance(context)
         workManager.enqueueUniquePeriodicWork(
@@ -280,19 +277,18 @@ class SystemService(private val context: Context) {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun startDailyReportService(){
+    fun startDailyReportService() {
 
         val startService = Intent(context, DailyReportGenerator::class.java)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startService(startService)
-        }else{
+        } else {
             context.startForegroundService(startService)
         }
 
 
     }
-
 
 
 }

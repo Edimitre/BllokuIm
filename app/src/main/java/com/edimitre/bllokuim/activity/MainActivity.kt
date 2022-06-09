@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
             if (monthlyIncomeTypes.isNullOrEmpty()) {
 
                 _monthlyIncomeViewModel.insertMonthlyIncomeTypes()
-                systemService.restartApp()
+
 
             }
         }
@@ -238,8 +238,6 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
         if (myApplicationSettings == null) {
             saveDefaultSettings()
         }
-
-
 
         if (myApplicationSettings != null) {
 

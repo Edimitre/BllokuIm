@@ -242,6 +242,7 @@ class SystemService(private val context: Context) {
         Runtime.getRuntime().exit(0)
     }
 
+
     fun startNotificationWorker() {
         val workRequest = PeriodicWorkRequest.Builder(
             MyNotificationWorker::class.java, 4,

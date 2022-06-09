@@ -88,7 +88,7 @@ class TimeUtils {
         return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 
-    fun getNrOfRemainingDaysOfActualMonth():Int{
+    fun getNrOfRemainingDaysOfActualMonth(): Int {
 
         val todayDate = getCurrentDate()
         val nrOfDays = getNrOfDaysOfActualMonth()

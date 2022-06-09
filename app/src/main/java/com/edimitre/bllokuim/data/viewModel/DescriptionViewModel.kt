@@ -7,7 +7,6 @@ import com.edimitre.bllokuim.data.model.Description
 import com.edimitre.bllokuim.data.service.DescriptionService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -24,12 +23,12 @@ class DescriptionViewModel @Inject constructor(private val descriptionService: D
 
     }
 
-    fun deleteDescription(description: Description):Job = viewModelScope.launch {
+    fun deleteDescription(description: Description): Job = viewModelScope.launch {
 
         descriptionService.deleteDescription(description)
     }
 
-    fun getAllDescriptionsList():List<Description>{
+    fun getAllDescriptionsList(): List<Description> {
 
 
         return runBlocking { descriptionService.getAllDescriptionsList() }

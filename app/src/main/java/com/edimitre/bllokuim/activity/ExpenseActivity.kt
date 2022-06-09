@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +33,6 @@ class ExpenseActivity : AppCompatActivity(), ExpenseAdapter.OnExpenseClickListen
 
     private lateinit var _userViewModel: MainUserViewModel
 
-    private var TAG = "BllokuIm => "
 
     private var user: MainUser? = null
 
@@ -178,7 +176,7 @@ class ExpenseActivity : AppCompatActivity(), ExpenseAdapter.OnExpenseClickListen
     // comes from adapter
     override fun onExpenseClicked(expense: Expense) {
 
-        Log.e(TAG, "expense => " + expense.description.name)
+        // todo do something with clicked expense
     }
 
     // comes from dialog
@@ -273,11 +271,11 @@ class ExpenseActivity : AppCompatActivity(), ExpenseAdapter.OnExpenseClickListen
         itemTouchHelper.attachToRecyclerView(expenses_recycler_view)
     }
 
-    private  fun disableTouchFunctions() {
+    private fun disableTouchFunctions() {
         itemTouchHelper.attachToRecyclerView(null)
     }
 
-    private fun deleteExpense(expense: Expense){
+    private fun deleteExpense(expense: Expense) {
 
         user!!.addMoney(expense.spentValue)
 

@@ -16,14 +16,17 @@ interface ExpenseDao {
 
     // FLOW
     @Query("SELECT * FROM expense_table WHERE year = :year and month = :month and date = :date")
-    fun getAllExpensesByYearMonthAndDateFlow(year: Int, month: Int, date: Int): Flow<List<Expense?>?>?
+    fun getAllExpensesByYearMonthAndDateFlow(
+        year: Int,
+        month: Int,
+        date: Int
+    ): Flow<List<Expense?>?>?
 
     @Query("SELECT * FROM expense_table WHERE year = :year and month = :month")
     fun getAllExpensesByYearMonth(year: Int, month: Int): Flow<List<Expense?>?>?
 
     @Query("SELECT COUNT(*) FROM expense_table where year = :year and month = :month and date =:date")
-    fun getSizeOfExpenseListByYearMonthDate(year: Int, month: Int,date: Int): Flow<Int?>
-
+    fun getSizeOfExpenseListByYearMonthDate(year: Int, month: Int, date: Int): Flow<Int?>
 
 
     @Query("select * from expense_table where name LIKE '%' || :name || '%'")

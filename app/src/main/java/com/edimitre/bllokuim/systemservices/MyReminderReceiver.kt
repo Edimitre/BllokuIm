@@ -45,13 +45,12 @@ class MyReminderReceiver : BroadcastReceiver() {
 
         if (reminder != null) {
 
-            systemService.notify("PersonalManager", reminder.description)
+            systemService.notify("Po te kujtoj", reminder.description)
 
             reminder.isActive = false
 
             reminderDao.saveReminderOnThread(reminder)
         }
-
 
     }
 

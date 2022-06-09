@@ -3,7 +3,6 @@ package com.edimitre.bllokuim.fragment
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.edimitre.bllokuim.R
-import com.edimitre.bllokuim.activity.MainActivity
 import com.edimitre.bllokuim.data.model.MainUser
 import com.edimitre.bllokuim.systemservices.SystemService
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_user_form.*
 import javax.inject.Inject
@@ -37,7 +34,6 @@ class AddUserForm : AppCompatDialogFragment() {
         )
 
 
-
     }
 
     override fun onCreateView(
@@ -53,16 +49,16 @@ class AddUserForm : AppCompatDialogFragment() {
 
         setListeners()
 
-        if (systemService.dbExist()){
+        if (systemService.dbExist()) {
             btn_reload_user_db.visibility = View.VISIBLE
         }
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
 
-        btn_save_user.setOnClickListener{
+        btn_save_user.setOnClickListener {
 
-            if(inputIsOk()){
+            if (inputIsOk()) {
 
                 val name = input_name.text.toString()
                 val totalAmountOfMoney = input_total_existing_value.text.toString().toDouble()
@@ -70,15 +66,19 @@ class AddUserForm : AppCompatDialogFragment() {
                 listener!!.addUser(user)
 
                 dismiss()
-            }else{
+            } else {
 
-                Toast.makeText(activity, "Dicka nuk shkoi sic duhet....! ju lutem kontrolloni te dhenat !", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "Dicka nuk shkoi sic duhet....! ju lutem kontrolloni te dhenat !",
+                    Toast.LENGTH_SHORT
+                ).show()
 
             }
 
         }
 
-        btn_reload_user_db.setOnClickListener{
+        btn_reload_user_db.setOnClickListener {
 
             opendReloadDbDialog()
         }
@@ -103,7 +103,7 @@ class AddUserForm : AppCompatDialogFragment() {
 
     }
 
-    private fun inputIsOk():Boolean{
+    private fun inputIsOk(): Boolean {
 
         return when {
             input_name.text.toString() == "" -> {
@@ -114,7 +114,11 @@ class AddUserForm : AppCompatDialogFragment() {
 
             }
             input_total_existing_value.text.toString() == "" -> {
-                Toast.makeText(activity, "Vlera s'mund te jete bosh...vendos 0 nqs skeni gjendje", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "Vlera s'mund te jete bosh...vendos 0 nqs skeni gjendje",
+                    Toast.LENGTH_SHORT
+                ).show()
 
                 false
 

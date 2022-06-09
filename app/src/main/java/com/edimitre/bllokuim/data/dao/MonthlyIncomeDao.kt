@@ -1,6 +1,5 @@
 package com.edimitre.bllokuim.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.edimitre.bllokuim.data.model.MonthlyIncome
 import com.edimitre.bllokuim.data.model.MonthlyIncomeType
@@ -33,7 +32,11 @@ interface MonthlyIncomeDao {
     ): Flow<List<MonthlyIncome?>?>?
 
     @Query("SELECT * FROM monthly_income_table WHERE year = :year and month = :month and day = :date")
-    fun getAllMonthlyIncomesByYearMonthDate(year: Int, month: Int, date: Int): Flow<List<MonthlyIncome?>?>?
+    fun getAllMonthlyIncomesByYearMonthDate(
+        year: Int,
+        month: Int,
+        date: Int
+    ): Flow<List<MonthlyIncome?>?>?
 
     @Query("select * from monthly_income_table where name LIKE '%' || :name || '%'")
     fun getAllMonthlyIncomeByName(name: String?): Flow<List<MonthlyIncome?>?>?
@@ -67,7 +70,7 @@ interface MonthlyIncomeDao {
     fun getValueOfIncomesByYearMonthDate(year: Int, month: Int, date: Int): Flow<Int?>
 
     @Query("SELECT * FROM monthly_income_table WHERE year =:year and month =:month ORDER BY value DESC LIMIT 1")
-    fun getBiggestMonthlyIncomeByYearMonth(year: Int,month: Int): Flow<MonthlyIncome?>
+    fun getBiggestMonthlyIncomeByYearMonth(year: Int, month: Int): Flow<MonthlyIncome?>
 
     @Query("SELECT * FROM monthly_income_table WHERE year =:year ORDER BY value DESC LIMIT 1")
     fun getBiggestMonthlyIncomeByYear(year: Int): Flow<MonthlyIncome?>

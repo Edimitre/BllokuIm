@@ -10,11 +10,11 @@ data class MyApplicationSettings(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
 
-    var workerEnabled:Boolean,
+    var workerEnabled: Boolean,
 
-    var dailyReportGeneratorEnabled:Boolean,
+    var dailyReportGeneratorEnabled: Boolean,
 
-    var backDbEnabled:Boolean
+    var backDbEnabled: Boolean
 
 
 ) {

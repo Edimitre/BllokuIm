@@ -20,6 +20,6 @@ data class Expense(
     var description: Description
 
 
-){
+) {
 
 }

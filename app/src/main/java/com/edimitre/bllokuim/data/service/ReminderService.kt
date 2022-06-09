@@ -1,6 +1,5 @@
 package com.edimitre.bllokuim.data.service
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.edimitre.bllokuim.data.dao.ReminderDao
@@ -19,7 +18,6 @@ class ReminderService @Inject constructor(private val reminderDao: ReminderDao) 
 
         reminderDao.saveReminder(reminder)
 
-        Log.e("PersonalManager", "reminder me emer : ${reminder.description} U ruajt")
 
     }
 
@@ -27,7 +25,6 @@ class ReminderService @Inject constructor(private val reminderDao: ReminderDao) 
 
         reminderDao.deleteReminder(reminder)
 
-        Log.e("PersonalManager", "reminder me emer : ${reminder.description} U fshi")
 
     }
 

@@ -8,13 +8,11 @@ import com.edimitre.bllokuim.data.service.MainUserService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class MainUserViewModel @Inject constructor(private val userService: MainUserService) :
     ViewModel() {
-
 
 
     fun saveUser(user: MainUser): Job = viewModelScope.launch {

@@ -3,7 +3,6 @@ package com.edimitre.bllokuim.data.model
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.edimitre.bllokuim.data.model.MonthlyIncomeType
 
 @Entity(tableName = "monthly_income_table")
 data class MonthlyIncome(

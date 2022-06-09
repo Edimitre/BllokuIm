@@ -3,7 +3,6 @@ package com.edimitre.bllokuim.activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +20,7 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProfileActivity : AppCompatActivity(),AddUserForm.AddUserListener {
+class ProfileActivity : AppCompatActivity(), AddUserForm.AddUserListener {
 
 
     private lateinit var _userViewModel: MainUserViewModel
@@ -35,7 +34,6 @@ class ProfileActivity : AppCompatActivity(),AddUserForm.AddUserListener {
 
     private var user: MainUser? = null
 
-    var TAG = "BllokuIm =>"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +59,7 @@ class ProfileActivity : AppCompatActivity(),AddUserForm.AddUserListener {
 
     }
 
-    private fun setToolBar(name:String) {
+    private fun setToolBar(name: String) {
 
         setSupportActionBar(profile_toolbar)
 
@@ -116,12 +114,12 @@ class ProfileActivity : AppCompatActivity(),AddUserForm.AddUserListener {
             startActivity(intent)
         }
 
-        btn_go_reports.setOnClickListener{
+        btn_go_reports.setOnClickListener {
             intent = Intent(this, DailyReportActivity::class.java)
             startActivity(intent)
         }
 
-        btn_edit_profile.setOnClickListener{
+        btn_edit_profile.setOnClickListener {
             openEditProfileDialog()
         }
 
@@ -146,7 +144,6 @@ class ProfileActivity : AppCompatActivity(),AddUserForm.AddUserListener {
         }
 
         alertDialog.setNegativeButton("Mbyll") { _, _ ->
-
 
 
         }

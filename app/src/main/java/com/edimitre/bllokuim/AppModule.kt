@@ -72,7 +72,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun getSystemService(context:Application): SystemService {
+    fun getSystemService(context: Application): SystemService {
         return SystemService(context)
     }
 

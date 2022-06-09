@@ -1,7 +1,6 @@
 package com.edimitre.bllokuim.data.service
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.edimitre.bllokuim.data.dao.MonthlyIncomeDao
@@ -12,7 +11,6 @@ import javax.inject.Inject
 
 class MonthlyIncomeService @Inject constructor(private val monthlyIncomeDao: MonthlyIncomeDao) {
 
-    val TAG = "BllokuIm => "
 
     var allMonthlyIncomeTypes = monthlyIncomeDao.getAllMonthlyIncomeTypes().asLiveData()
 
@@ -40,14 +38,12 @@ class MonthlyIncomeService @Inject constructor(private val monthlyIncomeDao: Mon
 
         monthlyIncomeDao.saveMonthlyIncomeType(monthlyIncomeType)
 
-        Log.e(TAG, "monthly income type => " + monthlyIncomeType.name + " u ruajt me sukses")
     }
 
     suspend fun saveMonthlyIncome(monthlyIncome: MonthlyIncome) {
 
         monthlyIncomeDao.saveMonthlyIncome(monthlyIncome)
 
-        Log.e(TAG, "monthly income => " + monthlyIncome.description + " u ruajt me sukses")
     }
 
     suspend fun deleteMonthlyIncome(monthlyIncome: MonthlyIncome) {

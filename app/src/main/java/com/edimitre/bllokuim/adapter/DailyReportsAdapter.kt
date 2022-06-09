@@ -82,7 +82,7 @@ class DailyReportsAdapter : RecyclerView.Adapter<DailyReportsAdapter.DailyReport
 
             dailyReportDateText.text = drDate
             dailyReportTimeText.text = drTime
-            val spentValue : Int = dailyReport.valueSpent?: 0
+            val spentValue: Int = dailyReport.valueSpent ?: 0
             spentValueReportText.text = "Vlera shpenzuar : $spentValue"
             limitValueReportText.text = "Vlera limit :" + dailyReport.valueLimit.toString()
 

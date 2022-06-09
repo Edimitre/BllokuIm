@@ -51,20 +51,20 @@ class SettingsForm : BottomSheetDialogFragment() {
     }
 
     private fun setListeners() {
-        btn_save_settings.setOnClickListener{
+        btn_save_settings.setOnClickListener {
             saveSettings()
             dismiss()
         }
 
-        btn_close_settings.setOnClickListener{
+        btn_close_settings.setOnClickListener {
             dismiss()
         }
 
-        btn_back_up_db.setOnClickListener{
+        btn_back_up_db.setOnClickListener {
             openExportDbDialog()
         }
 
-        btn_reload_db.setOnClickListener{
+        btn_reload_db.setOnClickListener {
             openImportDbDialog()
         }
     }
@@ -113,16 +113,19 @@ class SettingsForm : BottomSheetDialogFragment() {
         }
 
 
-        if (db_backup_switch.isChecked){
-            // todo check for permission and request if not given
-            if (!systemService.permissionGranted()){
-                Toast.makeText(activity, "ju lutem lejoni aplikacionin te aksesoje storage", Toast.LENGTH_SHORT).show()
-            }else{
+        if (db_backup_switch.isChecked) {
+            if (!systemService.permissionGranted()) {
+                Toast.makeText(
+                    activity,
+                    "ju lutem lejoni aplikacionin te aksesoje storage",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
                 mySettings!!.backDbEnabled = true
             }
         }
 
-        val thread = Thread{
+        val thread = Thread {
             settingsDao.saveSettings(mySettings!!)
         }
 
@@ -153,7 +156,6 @@ class SettingsForm : BottomSheetDialogFragment() {
     }
 
 
-
     private fun openImportDbDialog() {
         val alertDialog = MaterialAlertDialogBuilder(
             requireContext(),
@@ -162,11 +164,13 @@ class SettingsForm : BottomSheetDialogFragment() {
 
         alertDialog.setTitle("Deshironi te ngarkoni databazen ?\n!!KUJDES!!")
 
-        alertDialog.setMessage("ky veprim keshillohet vetem \n" +
-                "ne rastet kur aplikacioni sapo eshte instaluar\n" +
-                "apo hequr edhe instaluar perseri..\nketu ngarkohen te dhenat tuaja \n" +
-                "te ruajtura me pare\nnqs asnje nga keto me siper nuk ka ndodhur..\n" +
-                "ju lutem mbyllni kete dialog")
+        alertDialog.setMessage(
+            "ky veprim keshillohet vetem \n" +
+                    "ne rastet kur aplikacioni sapo eshte instaluar\n" +
+                    "apo hequr edhe instaluar perseri..\nketu ngarkohen te dhenat tuaja \n" +
+                    "te ruajtura me pare\nnqs asnje nga keto me siper nuk ka ndodhur..\n" +
+                    "ju lutem mbyllni kete dialog"
+        )
 
         alertDialog.setPositiveButton("Ngarko") { _, _ ->
 
@@ -175,7 +179,6 @@ class SettingsForm : BottomSheetDialogFragment() {
         }
 
         alertDialog.setNegativeButton("Mbyll") { _, _ ->
-
 
 
         }
@@ -191,12 +194,14 @@ class SettingsForm : BottomSheetDialogFragment() {
 
         alertDialog.setTitle("Deshironi te ruani databazen ?\n!!KUJDES!!")
 
-        alertDialog.setMessage("databaza ruhet automatikisht cdo dite\n" +
-                "nqs keni e aktivizuar ne preferencat \nedhe i keni dhene leje aplikacionit per perdorimin e storage \n" +
-                "por ketu mund ta ruani manualisht..\nnqs deshironi te hiqni edhe te instaloni \nperseri aplikacionin \n" +
-                "per cfaredo arsye\nte dhenat tuaja do te jene ketu\n" +
-                "ky aplikacion i ruan datat tek telefoni juaj \nedhe nuk ka nevoje per internet\n" +
-                "cafredo qe shtypni tek ky aplikacion ndodh tek ju\n ky aplikacion nuk ruan asnje te dhene ne asnje server\n")
+        alertDialog.setMessage(
+            "databaza ruhet automatikisht cdo dite\n" +
+                    "nqs keni e aktivizuar ne preferencat \nedhe i keni dhene leje aplikacionit per perdorimin e storage \n" +
+                    "por ketu mund ta ruani manualisht..\nnqs deshironi te hiqni edhe te instaloni \nperseri aplikacionin \n" +
+                    "per cfaredo arsye\nte dhenat tuaja do te jene ketu\n" +
+                    "ky aplikacion i ruan datat tek telefoni juaj \nedhe nuk ka nevoje per internet\n" +
+                    "cafredo qe shtypni tek ky aplikacion ndodh tek ju\n ky aplikacion nuk ruan asnje te dhene ne asnje server\n"
+        )
 
         alertDialog.setPositiveButton("Ruaj") { _, _ ->
 
@@ -205,7 +210,6 @@ class SettingsForm : BottomSheetDialogFragment() {
         }
 
         alertDialog.setNegativeButton("Mbyll") { _, _ ->
-
 
 
         }

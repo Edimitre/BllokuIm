@@ -9,10 +9,10 @@ import com.edimitre.bllokuim.data.model.*
 
 
 @Database(
-    entities = [MainUser::class,Description::class,
-        Expense::class,MonthlyIncome::class,
-        MonthlyIncomeType::class,Reminder::class,DailyReport::class,
-               MyApplicationSettings::class], version = 1, exportSchema = false
+    entities = [MainUser::class, Description::class,
+        Expense::class, MonthlyIncome::class,
+        MonthlyIncomeType::class, Reminder::class, DailyReport::class,
+        MyApplicationSettings::class], version = 1, exportSchema = false
 )
 abstract class MyRoomDatabase : RoomDatabase() {
 

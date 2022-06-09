@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.edimitre.bllokuim.R
 import com.edimitre.bllokuim.data.model.Description
@@ -28,11 +27,6 @@ class AddExpenseForm : BottomSheetDialogFragment() {
 
     private lateinit var listener: AddExpenseListener
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +47,7 @@ class AddExpenseForm : BottomSheetDialogFragment() {
     }
 
 
-    private fun initViewModel(){
+    private fun initViewModel() {
         _descriptionViewModel = ViewModelProvider(this)[DescriptionViewModel::class.java]
 
         _expenseViewModel = ViewModelProvider(this)[ExpenseViewModel::class.java]
@@ -80,15 +74,23 @@ class AddExpenseForm : BottomSheetDialogFragment() {
 
     private fun setListeners() {
 
-        btn_save_expense.setOnClickListener{
+        btn_save_expense.setOnClickListener {
 
-            if (inputIsOk()){
+            if (inputIsOk()) {
                 val description: Description = expense_type_spinner.selectedItem as Description
 
                 val value = input_expense_value.text.toString().toDouble()
 
-                val expense = Expense(0, TimeUtils().getCurrentYear(),TimeUtils().getCurrentMonth(),
-                    TimeUtils().getCurrentDate(),TimeUtils().getCurrentHour(),TimeUtils().getCurrentMinute(),value,description)
+                val expense = Expense(
+                    0,
+                    TimeUtils().getCurrentYear(),
+                    TimeUtils().getCurrentMonth(),
+                    TimeUtils().getCurrentDate(),
+                    TimeUtils().getCurrentHour(),
+                    TimeUtils().getCurrentMinute(),
+                    value,
+                    description
+                )
 
                 listener.addExpense(expense)
 
@@ -97,12 +99,12 @@ class AddExpenseForm : BottomSheetDialogFragment() {
 
         }
 
-        btn_close_expense_dialog.setOnClickListener{
+        btn_close_expense_dialog.setOnClickListener {
             dismiss()
         }
     }
 
-    private fun inputIsOk():Boolean{
+    private fun inputIsOk(): Boolean {
         return input_expense_value.text.toString().isNotEmpty()
 
     }

@@ -4,7 +4,6 @@ import android.app.Notification
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.edimitre.bllokuim.R
 import com.edimitre.bllokuim.data.dao.DailyReportDao
@@ -43,7 +42,6 @@ class DailyReportGenerator : Service() {
             startServiceNotification()
 
             generateReport()
-
 
 
         }
@@ -90,7 +88,6 @@ class DailyReportGenerator : Service() {
         )
 
         dailyReportDao.saveReportOnThread(dailyReport)
-        Log.e("BllokuIm => ", "daily report generated and saved : ${dailyReport.isOk}")
 
     }
 

@@ -3,7 +3,6 @@ package com.edimitre.bllokuim.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.edimitre.bllokuim.data.model.MainUser
-import kotlinx.coroutines.flow.Flow
 
 
 @Dao

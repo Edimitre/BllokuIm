@@ -10,8 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.lifecycle.ViewModelProvider
 import com.edimitre.bllokuim.R
 import com.edimitre.bllokuim.data.model.Reminder
 import com.edimitre.bllokuim.data.utils.TimeUtils
@@ -40,10 +38,6 @@ class AddReminderForm : BottomSheetDialogFragment() {
 
     private var minutes: Int? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,14 +58,6 @@ class AddReminderForm : BottomSheetDialogFragment() {
     }
 
 
-    private fun loadViewModel() {
-
-
-        _reminderViewModel = ViewModelProvider(this)[ReminderViewModel::class.java]
-
-
-    }
-
     private fun setListeners() {
         btn_open_alarm_date_picker.setOnClickListener {
 
@@ -83,7 +69,8 @@ class AddReminderForm : BottomSheetDialogFragment() {
 
             if (inputIsOk()) {
 
-                val timeInMillis = TimeUtils().getTimeInMilliSeconds(year!!, month!!, date!!, hour!!, minutes!!)
+                val timeInMillis =
+                    TimeUtils().getTimeInMilliSeconds(year!!, month!!, date!!, hour!!, minutes!!)
                 val description = reminder_description_input.text.toString()
                 val reminder = Reminder(0, timeInMillis, description, true)
                 listener!!.addReminder(reminder)

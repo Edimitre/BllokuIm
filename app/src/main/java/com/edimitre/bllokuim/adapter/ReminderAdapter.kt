@@ -48,10 +48,12 @@ class ReminderAdapter : RecyclerView.Adapter<ReminderAdapter.ReminderHolder>() {
     class ReminderHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-        private val isReminderActiveText: TextView = itemView.findViewById(R.id.is_reminder_active_text)
+        private val isReminderActiveText: TextView =
+            itemView.findViewById(R.id.is_reminder_active_text)
         private val reminderDateText: TextView = itemView.findViewById(R.id.reminder_date_text)
         private val reminderTimeText: TextView = itemView.findViewById(R.id.reminder_time_text)
-        private val reminderDescriptionText: TextView = itemView.findViewById(R.id.reminder_description_text)
+        private val reminderDescriptionText: TextView =
+            itemView.findViewById(R.id.reminder_description_text)
 
 
         fun bind(reminder: Reminder) {

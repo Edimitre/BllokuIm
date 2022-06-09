@@ -14,7 +14,6 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -104,7 +103,6 @@ class SystemService(private val context: Context) {
         // if calendar in the past
         if (cal.timeInMillis < System.currentTimeMillis()) {
             cal.add(Calendar.DAY_OF_YEAR, 1) // add one day to wanted time
-            Log.e("BllokuIm =>", "Calendar in the past .. adding one day")
         }
 
 
@@ -124,7 +122,6 @@ class SystemService(private val context: Context) {
                 pendingIntent
             )
         }
-        Log.e("BllokuIm =>", "dailyReport Scheduled")
 
     }
 
@@ -182,8 +179,7 @@ class SystemService(private val context: Context) {
                     dst.transferFrom(src, 0, src.size())
 //                    src.close()
 //                    dst.close()
-                    Log.e("BllokuIm => ", "database backed up successfully ")
-
+                    Toast.makeText(context, "Databasa u ruajt me sukses", Toast.LENGTH_SHORT).show()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
@@ -217,7 +213,6 @@ class SystemService(private val context: Context) {
                     intent.flags = FLAG_ACTIVITY_NEW_TASK
                     context.startActivity(intent)
 
-                    Log.e("BllokuIm =>", "database imported")
 
                     Toast.makeText(context, "Databaza u ngarkua me sukses", Toast.LENGTH_SHORT)
                         .show()
@@ -259,7 +254,6 @@ class SystemService(private val context: Context) {
             "dbBackupWorker",
             ExistingPeriodicWorkPolicy.REPLACE, workRequest
         )
-        Log.e("BllokuIm => ", "database backup scheduled")
     }
 
     fun startDbBackupWorker() {
@@ -273,7 +267,6 @@ class SystemService(private val context: Context) {
             "dbBackupWorker",
             ExistingPeriodicWorkPolicy.REPLACE, workRequest
         )
-        Log.e("BllokuIm => ", "database backup scheduled")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

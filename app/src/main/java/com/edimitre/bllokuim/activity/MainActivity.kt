@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
@@ -39,9 +38,6 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
 
     private lateinit var _monthlyIncomeViewModel: MonthlyIncomeViewModel
 
-    private lateinit var profileItem: MenuItem
-
-    private var TAG = "BllokuIm => "
 
     private var user: MainUser? = null
 
@@ -191,12 +187,9 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
             monthlyIncomeTypes = it
 
             if (monthlyIncomeTypes.isNullOrEmpty()) {
-                Log.e(TAG, "initial data empty ..creating it")
+
                 _monthlyIncomeViewModel.insertMonthlyIncomeTypes()
                 systemService.restartApp()
-
-            } else {
-                Log.e(TAG, "initial data exist ..skipping")
 
             }
         }
@@ -261,7 +254,7 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
             }
         }
 
-        Log.e(TAG, "setting loaded", )
+
     }
 
     private fun saveDefaultSettings() {

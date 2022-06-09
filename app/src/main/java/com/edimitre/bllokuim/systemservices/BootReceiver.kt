@@ -52,7 +52,6 @@ class BootReceiver : BroadcastReceiver() {
             }
         }
 
-        Log.e("BllokuIm => ", "loaded settings from boot receiver")
 
     }
 

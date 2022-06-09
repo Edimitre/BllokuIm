@@ -1,24 +1,20 @@
 package com.edimitre.bllokuim.activity
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edimitre.bllokuim.R
 import com.edimitre.bllokuim.adapter.DailyReportsAdapter
-import com.edimitre.bllokuim.adapter.DescriptionAdapter
 import com.edimitre.bllokuim.data.model.DailyReport
-import com.edimitre.bllokuim.data.model.Description
 import com.edimitre.bllokuim.data.viewModel.DailyReportViewModel
-import com.edimitre.bllokuim.data.viewModel.DescriptionViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_daily_report.*
-import kotlinx.android.synthetic.main.activity_description.*
 
 @AndroidEntryPoint
 class DailyReportActivity : AppCompatActivity() {
@@ -55,13 +51,13 @@ class DailyReportActivity : AppCompatActivity() {
 
     }
 
-    private fun initViewModel(){
+    private fun initViewModel() {
         _dailyReportViewModel = ViewModelProvider(this)[DailyReportViewModel::class.java]
 
 
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         adapter = DailyReportsAdapter()
 
         daily_report_recycler_view.setHasFixedSize(true)
@@ -72,7 +68,7 @@ class DailyReportActivity : AppCompatActivity() {
     private fun showDailyReports() {
 
 
-        _dailyReportViewModel.allDailyReports.observe(this){
+        _dailyReportViewModel.allDailyReports.observe(this) {
 
             adapter.putDailyReports(it as List<DailyReport>)
         }
@@ -93,7 +89,7 @@ class DailyReportActivity : AppCompatActivity() {
                 }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val dailyReport:DailyReport? =
+                    val dailyReport: DailyReport? =
                         adapter.getDailyReportByPos(viewHolder.adapterPosition)
 
                     if (dailyReport != null) {
@@ -103,7 +99,7 @@ class DailyReportActivity : AppCompatActivity() {
                             R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
                         )
 
-                        alertDialog.setTitle("Raporti dates : ${dailyReport.year} : ${dailyReport.month} : ${dailyReport.date} " )
+                        alertDialog.setTitle("Raporti dates : ${dailyReport.year} : ${dailyReport.month} : ${dailyReport.date} ")
 
                         alertDialog.setMessage(
                             "Deshironi Ta Fshini ?\n" +
@@ -123,8 +119,7 @@ class DailyReportActivity : AppCompatActivity() {
                         }
 
                         alertDialog.setNegativeButton("mbyll") { _, _ ->
-
-
+                            showDailyReports()
                         }
 
                         alertDialog.setOnDismissListener {

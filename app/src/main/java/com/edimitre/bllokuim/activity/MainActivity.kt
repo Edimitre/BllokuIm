@@ -235,25 +235,24 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
 
         val myApplicationSettings = settingsDao.getSettings()
 
-        when (myApplicationSettings) {
-            null -> {
-                saveDefaultSettings()
-            }
+        if (myApplicationSettings == null) {
+            saveDefaultSettings()
         }
 
 
-        when {
-            myApplicationSettings!!.dailyReportGeneratorEnabled -> {
+
+        if (myApplicationSettings != null) {
+
+            if (myApplicationSettings.dailyReportGeneratorEnabled) {
                 systemService.scheduleDailyReportAlarm()
             }
-            myApplicationSettings.workerEnabled -> {
+            if (myApplicationSettings.workerEnabled) {
                 systemService.startNotificationWorker()
             }
-            myApplicationSettings.backDbEnabled -> {
+            if (myApplicationSettings.backDbEnabled) {
                 systemService.startDbBackupWorker()
             }
         }
-
 
     }
 

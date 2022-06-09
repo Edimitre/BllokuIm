@@ -65,6 +65,10 @@ class DescriptionAdapter(private val onDescriptionClickListener: OnDescriptionCl
         notifyDataSetChanged()
     }
 
+    fun getDescriptionByPos(pos: Int): Description? {
+        return this.allDescriptions?.get(pos)
+    }
+
     interface OnDescriptionClickListener {
         fun onDescriptionClicked(description: Description)
     }

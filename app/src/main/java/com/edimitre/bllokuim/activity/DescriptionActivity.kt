@@ -8,15 +8,19 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.edimitre.bllokuim.R
 import com.edimitre.bllokuim.adapter.DescriptionAdapter
 import com.edimitre.bllokuim.data.model.Description
+import com.edimitre.bllokuim.data.model.Expense
 import com.edimitre.bllokuim.data.viewModel.DescriptionViewModel
 import com.edimitre.bllokuim.data.viewModel.MainUserViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_description.*
+import kotlinx.android.synthetic.main.activity_expense.*
 import java.util.*
 
 @AndroidEntryPoint
@@ -27,6 +31,8 @@ class DescriptionActivity : AppCompatActivity() ,DescriptionAdapter.OnDescriptio
     private lateinit var descriptionViewModel: DescriptionViewModel
 
     private var TAG = "BllokuIm => "
+
+    private lateinit var itemTouchHelper: ItemTouchHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +69,8 @@ class DescriptionActivity : AppCompatActivity() ,DescriptionAdapter.OnDescriptio
         descriptions_recycler_view.setHasFixedSize(true)
         descriptions_recycler_view.layoutManager = LinearLayoutManager(this)
         descriptions_recycler_view.adapter = adapter
+
+
     }
 
     private fun setListeners(){
@@ -109,12 +117,80 @@ class DescriptionActivity : AppCompatActivity() ,DescriptionAdapter.OnDescriptio
     private fun showDescriptions(){
 
         descriptionViewModel.descriptionList.observe(this){adapter.putDescriptions(it)}
+
+        enableTouchFunctions()
+
     }
+
+
+
+
 
     // method inherited from adapter
     override fun onDescriptionClicked(description: Description) {
 
         Log.e(TAG, "description clicked => " + description.name )
+    }
+
+    private fun enableTouchFunctions() {
+        itemTouchHelper =
+            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return false
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val description:Description? =
+                        adapter.getDescriptionByPos(viewHolder.adapterPosition)
+
+                    if (description != null) {
+
+                        val alertDialog = MaterialAlertDialogBuilder(
+                            this@DescriptionActivity,
+                            R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
+                        )
+
+                        alertDialog.setTitle("Pershkrimi : ${description.name} " )
+
+                        alertDialog.setMessage(
+                            "Deshironi Ta Fshini ?\n" +
+                                    "KUJDES! ..ky veperim nuk mund te rikthehet!"
+                        )
+                        alertDialog.setPositiveButton("Fshij") { _, _ ->
+
+                            descriptionViewModel.deleteDescription(description)
+
+
+                            Toast.makeText(
+                                applicationContext,
+                                "pershkrimi ${description.name} u fshi",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+
+                        alertDialog.setNegativeButton("mbyll") { _, _ ->
+
+
+                        }
+
+                        alertDialog.setOnDismissListener {
+                            showDescriptions()
+                        }
+
+                        alertDialog.show()
+
+                    }
+
+
+                }
+            })
+
+        itemTouchHelper.attachToRecyclerView(descriptions_recycler_view)
     }
 
 

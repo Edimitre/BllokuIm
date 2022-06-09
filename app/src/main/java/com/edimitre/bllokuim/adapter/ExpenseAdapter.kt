@@ -96,6 +96,10 @@ class ExpenseAdapter(private val onExpenseClickListener: OnExpenseClickListener)
         notifyDataSetChanged()
     }
 
+    fun getExpenseByPos(pos: Int): Expense? {
+        return this.allExpenses?.get(pos)
+    }
+
     interface OnExpenseClickListener {
         fun onExpenseClicked(expense: Expense)
     }

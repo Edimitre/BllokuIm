@@ -28,5 +28,16 @@ class DailyReportViewModel @Inject constructor(private val dailyReportService: D
 
     }
 
+    fun deleteDailyReport(dailyReport: DailyReport) {
+
+        val thread = thread{
+            dailyReportService.deleteDailyReport(dailyReport)
+
+        }
+        thread.start()
+        thread.join()
+
+    }
+
 
 }

@@ -25,7 +25,7 @@ class DailyReportService @Inject constructor(private val dailyReportDao: DailyRe
         Log.e(TAG, "description => " + dailyReport.isOk + " u ruajt me sukses")
     }
 
-    suspend fun deleteDailyReport(dailyReport: DailyReport){
+    fun deleteDailyReport(dailyReport: DailyReport){
         dailyReportDao.deleteDailyReport(dailyReport)
     }
 

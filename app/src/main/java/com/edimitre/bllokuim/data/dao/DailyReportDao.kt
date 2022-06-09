@@ -15,6 +15,6 @@ interface DailyReportDao {
     fun getAllDailyReports(): Flow<List<DailyReport?>?>?
 
     @Delete
-    suspend fun deleteDailyReport(dailyReport: DailyReport?)
+    fun deleteDailyReport(dailyReport: DailyReport?)
 
 }

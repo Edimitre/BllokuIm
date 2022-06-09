@@ -22,6 +22,13 @@ class DescriptionService @Inject constructor(private val descriptionDao: Descrip
         Log.e(TAG, "description => " + description.name + " u ruajt me sukses")
     }
 
+    suspend fun deleteDescription(description: Description) {
+
+        descriptionDao.delete(description)
+
+        Log.e(TAG, "description => " + description.name + " u fshi me sukses")
+    }
+
     suspend fun getAllDescriptionsList():List<Description>{
 
         return descriptionDao.getAllList()

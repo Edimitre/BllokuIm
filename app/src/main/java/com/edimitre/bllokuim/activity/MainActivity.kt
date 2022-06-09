@@ -166,6 +166,8 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
                 openRegisterDialog()
             }
         }
+
+
     }
 
     private fun initUser() {

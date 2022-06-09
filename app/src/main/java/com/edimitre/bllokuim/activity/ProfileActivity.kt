@@ -13,6 +13,7 @@ import com.edimitre.bllokuim.data.viewModel.ExpenseViewModel
 import com.edimitre.bllokuim.data.viewModel.MainUserViewModel
 import com.edimitre.bllokuim.data.viewModel.MonthlyIncomeViewModel
 import com.edimitre.bllokuim.systemservices.SystemService
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_profile.*
 import javax.inject.Inject
@@ -48,10 +49,6 @@ class ProfileActivity : AppCompatActivity() {
 
         setListeners()
 
-
-        if (systemService.dbExist()){
-            btn_reload_db.visibility = View.VISIBLE
-        }
     }
 
     private fun initViewModel() {
@@ -122,15 +119,9 @@ class ProfileActivity : AppCompatActivity() {
             intent = Intent(this, DailyReportActivity::class.java)
             startActivity(intent)
         }
-        btn_back_up_db.setOnClickListener{
-            systemService.exportDatabase()
-        }
 
-        btn_reload_db.setOnClickListener{
-            systemService.importDatabase()
-        }
+
     }
-
 
 
 }

@@ -24,6 +24,11 @@ class DescriptionViewModel @Inject constructor(private val descriptionService: D
 
     }
 
+    fun deleteDescription(description: Description):Job = viewModelScope.launch {
+
+        descriptionService.deleteDescription(description)
+    }
+
     fun getAllDescriptionsList():List<Description>{
 
 

@@ -8,6 +8,8 @@
     tools:context=".fragment.SettingsForm"
     android:background="?attr/colorPrimary">
 
+
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -20,6 +22,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_reload_db"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_reload"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="?attr/colorPrimaryVariant"/>
+
+    <ImageButton
+        android:id="@+id/btn_back_up_db"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_backup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="2dp"
+        android:backgroundTint="?attr/colorPrimaryVariant"/>
 
     <!--NOTIFICATION WORKER SETTING-->
     <com.google.android.material.card.MaterialCardView

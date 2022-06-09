@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="?attr/colorPrimary"
+    android:backgroundTint="?attr/colorPrimaryVariant"
     app:strokeWidth="1dp"
     app:strokeColor="@color/black"
     app:contentPadding="8dp"
@@ -23,7 +23,6 @@
             android:alpha=".70"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
@@ -38,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="?attr/colorOnPrimary"/>
+            android:textColor="?attr/colorOnSecondary"/>
 
         <TextView
             android:id="@+id/reminder_date_text"
@@ -51,7 +50,7 @@
             android:layout_marginTop="8dp"
             android:textSize="18sp"
             android:textStyle="italic"
-            android:textColor="?attr/colorOnPrimary"/>
+            android:textColor="?attr/colorOnSecondary"/>
 
         <TextView
             android:id="@+id/reminder_time_text"
@@ -64,7 +63,7 @@
             android:layout_marginTop="8dp"
             android:textSize="18sp"
             android:textStyle="italic"
-            android:textColor="?attr/colorOnPrimary"/>
+            android:textColor="?attr/colorOnSecondary"/>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -96,7 +95,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="Pershkrimi"
-                    android:textColor="?attr/colorOnPrimary"/>
+                    android:textColor="?attr/colorPrimaryVariant"/>
                 <TextView
                     android:id="@+id/reminder_description_text"
                     android:layout_width="wrap_content"
@@ -109,7 +108,7 @@
                     android:textSize="15sp"
                     android:gravity="center"
                     android:text="mira ishte ne erske  "
-                    android:textColor="?attr/colorOnPrimary"/>
+                    android:textColor="?attr/colorPrimaryVariant"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

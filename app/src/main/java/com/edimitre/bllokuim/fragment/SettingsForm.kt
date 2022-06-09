@@ -12,6 +12,7 @@ import com.edimitre.bllokuim.data.model.MyApplicationSettings
 import com.edimitre.bllokuim.data.utils.TimeUtils
 import com.edimitre.bllokuim.systemservices.SystemService
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_settings_form.*
 import javax.inject.Inject
@@ -57,6 +58,14 @@ class SettingsForm : BottomSheetDialogFragment() {
 
         btn_close_settings.setOnClickListener{
             dismiss()
+        }
+
+        btn_back_up_db.setOnClickListener{
+            openExportDbDialog()
+        }
+
+        btn_reload_db.setOnClickListener{
+            openImportDbDialog()
         }
     }
 
@@ -141,6 +150,67 @@ class SettingsForm : BottomSheetDialogFragment() {
         thread.join()
 
         return hasIncomes
+    }
+
+
+
+    private fun openImportDbDialog() {
+        val alertDialog = MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
+        )
+
+        alertDialog.setTitle("Deshironi te ngarkoni databazen ?\n!!KUJDES!!")
+
+        alertDialog.setMessage("ky veprim keshillohet vetem \n" +
+                "ne rastet kur aplikacioni sapo eshte instaluar\n" +
+                "apo hequr edhe instaluar perseri..\nketu ngarkohen te dhenat tuaja \n" +
+                "te ruajtura me pare\nnqs asnje nga keto me siper nuk ka ndodhur..\n" +
+                "ju lutem mbyllni kete dialog")
+
+        alertDialog.setPositiveButton("Ngarko") { _, _ ->
+
+            systemService.importDatabase()
+
+        }
+
+        alertDialog.setNegativeButton("Mbyll") { _, _ ->
+
+
+
+        }
+
+        alertDialog.show()
+    }
+
+    private fun openExportDbDialog() {
+        val alertDialog = MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
+        )
+
+        alertDialog.setTitle("Deshironi te ruani databazen ?\n!!KUJDES!!")
+
+        alertDialog.setMessage("databaza ruhet automatikisht cdo dite\n" +
+                "nqs keni e aktivizuar ne preferencat \nedhe i keni dhene leje aplikacionit per perdorimin e storage \n" +
+                "por ketu mund ta ruani manualisht..\nnqs deshironi te hiqni edhe te instaloni \nperseri aplikacionin \n" +
+                "per cfaredo arsye\nte dhenat tuaja do te jene ketu\n" +
+                "ky aplikacion i ruan datat tek telefoni juaj \nedhe nuk ka nevoje per internet\n" +
+                "cafredo qe shtypni tek ky aplikacion ndodh tek ju\n ky aplikacion nuk ruan asnje te dhene ne asnje server\n")
+
+        alertDialog.setPositiveButton("Ruaj") { _, _ ->
+
+            systemService.exportDatabase()
+
+        }
+
+        alertDialog.setNegativeButton("Mbyll") { _, _ ->
+
+
+
+        }
+
+        alertDialog.show()
     }
 
 }

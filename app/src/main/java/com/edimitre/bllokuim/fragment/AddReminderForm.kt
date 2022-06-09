@@ -16,13 +16,14 @@ import com.edimitre.bllokuim.R
 import com.edimitre.bllokuim.data.model.Reminder
 import com.edimitre.bllokuim.data.utils.TimeUtils
 import com.edimitre.bllokuim.data.viewModel.ReminderViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_reminder_form.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 @AndroidEntryPoint
-class AddReminderForm : AppCompatDialogFragment() {
+class AddReminderForm : BottomSheetDialogFragment() {
 
 
     private lateinit var _reminderViewModel: ReminderViewModel
@@ -41,10 +42,7 @@ class AddReminderForm : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(
-            STYLE_NORMAL,
-            android.R.style.Theme_Black_NoTitleBar_Fullscreen
-        )
+
     }
 
     override fun onCreateView(

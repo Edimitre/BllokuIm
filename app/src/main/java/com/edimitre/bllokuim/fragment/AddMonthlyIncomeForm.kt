@@ -17,13 +17,14 @@ import com.edimitre.bllokuim.data.model.MonthlyIncomeType
 import com.edimitre.bllokuim.data.utils.TimeUtils
 
 import com.edimitre.bllokuim.data.viewModel.MonthlyIncomeViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 import kotlinx.android.synthetic.main.fragment_add_expense.*
 import kotlinx.android.synthetic.main.fragment_add_monthly_income_form.*
 
 @AndroidEntryPoint
-class AddMonthlyIncomeForm : AppCompatDialogFragment() {
+class AddMonthlyIncomeForm : BottomSheetDialogFragment() {
 
 
     private lateinit var _monthlyIncomeViewModel: MonthlyIncomeViewModel
@@ -31,15 +32,7 @@ class AddMonthlyIncomeForm : AppCompatDialogFragment() {
 
     private lateinit var listener: AddMonthlyIncomeListener
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        setStyle(
-            STYLE_NORMAL,
-            android.R.style.Theme_Black_NoTitleBar_Fullscreen
-        )
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

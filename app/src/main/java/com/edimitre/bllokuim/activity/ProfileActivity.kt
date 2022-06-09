@@ -12,14 +12,16 @@ import com.edimitre.bllokuim.data.model.MainUser
 import com.edimitre.bllokuim.data.viewModel.ExpenseViewModel
 import com.edimitre.bllokuim.data.viewModel.MainUserViewModel
 import com.edimitre.bllokuim.data.viewModel.MonthlyIncomeViewModel
+import com.edimitre.bllokuim.fragment.AddUserForm
 import com.edimitre.bllokuim.systemservices.SystemService
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_profile.*
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity(),AddUserForm.AddUserListener {
 
 
     private lateinit var _userViewModel: MainUserViewModel
@@ -43,8 +45,6 @@ class ProfileActivity : AppCompatActivity() {
 
         initUser()
 
-        setToolBar()
-
         showUserProfile()
 
         setListeners()
@@ -61,11 +61,11 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun setToolBar() {
+    private fun setToolBar(name:String) {
 
         setSupportActionBar(profile_toolbar)
 
-        supportActionBar?.title = "Profili"
+        supportActionBar?.title = "Pershendetje ${name.uppercase(Locale.getDefault())}"
 
         profile_toolbar.setTitleTextColor(Color.WHITE)
     }
@@ -73,6 +73,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun initUser() {
         _userViewModel.getUser().observe(this) {
             user = it
+            setToolBar(user!!.name)
         }
     }
 
@@ -120,8 +121,43 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        btn_edit_profile.setOnClickListener{
+            openEditProfileDialog()
+        }
 
     }
 
+    private fun openEditProfileDialog() {
+        val alertDialog = MaterialAlertDialogBuilder(
+            this@ProfileActivity,
+            R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Background
+        )
+
+        alertDialog.setTitle("Deshironi te ndryshoni te dhenat e profilit ?\n!!KUJDES!!")
+
+        alertDialog.setMessage("Ky Veprim nuk mund te rikthehet")
+
+        alertDialog.setPositiveButton("Ndrysho") { _, _ ->
+
+            // open register dialog
+            val registerForm = AddUserForm()
+            registerForm.show(supportFragmentManager, "edit user profile")
+
+        }
+
+        alertDialog.setNegativeButton("Mbyll") { _, _ ->
+
+
+
+        }
+
+        alertDialog.show()
+    }
+
+    override fun addUser(mainUser: MainUser) {
+        mainUser.id = 1
+        _userViewModel.saveUser(mainUser)
+        Toast.makeText(this, " te dhenat u ruajten me sukses", Toast.LENGTH_SHORT).show()
+    }
 
 }

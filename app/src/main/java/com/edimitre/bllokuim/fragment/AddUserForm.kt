@@ -49,9 +49,7 @@ class AddUserForm : AppCompatDialogFragment() {
 
         setListeners()
 
-        if (systemService.dbExist()) {
-            btn_reload_user_db.visibility = View.VISIBLE
-        }
+
     }
 
     private fun setListeners() {
@@ -78,30 +76,10 @@ class AddUserForm : AppCompatDialogFragment() {
 
         }
 
-        btn_reload_user_db.setOnClickListener {
-
-            opendReloadDbDialog()
-        }
-    }
-
-    private fun opendReloadDbDialog() {
-        val dialog = AlertDialog.Builder(requireActivity())
-
-        dialog.setTitle("BllokuIm")
-        dialog.setMessage("U gjenden te dhena te ruajtura !!\nDeshironi ti ngarkoni ?")
-
-        dialog.setPositiveButton("Ngarko", DialogInterface.OnClickListener { _, _ ->
-            systemService.importDatabase()
-            systemService.restartApp()
-        })
-
-        dialog.setNegativeButton("Mbyll", DialogInterface.OnClickListener { _, _ ->
-            dismiss()
-        })
-
-        dialog.show()
 
     }
+
+
 
     private fun inputIsOk(): Boolean {
 

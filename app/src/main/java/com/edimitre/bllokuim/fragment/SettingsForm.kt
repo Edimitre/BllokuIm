@@ -47,6 +47,8 @@ class SettingsForm : BottomSheetDialogFragment() {
 
         setExistingValues()
 
+        setButtonBackUpExist()
+
         setListeners()
     }
 
@@ -69,6 +71,16 @@ class SettingsForm : BottomSheetDialogFragment() {
         }
     }
 
+
+    private fun setButtonBackUpExist(){
+        if (systemService.dbExist()){
+            btn_reload_db.visibility = View.VISIBLE
+        }else{
+            btn_reload_db.visibility = View.INVISIBLE
+
+        }
+
+    }
     private fun setExistingValues() {
 
         val thread = Thread {

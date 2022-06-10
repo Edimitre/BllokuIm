@@ -2,6 +2,7 @@ package com.edimitre.bllokuim.activity
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -89,19 +90,16 @@ class ReminderActivity : AppCompatActivity(), AddReminderForm.AddReminderListene
 
     }
 
-    private fun isReminderValid(reminder: Reminder): Boolean {
-        return reminder.alarmTimeInMillis >= System.currentTimeMillis()
-    }
 
     // comes from reminder form fragment
     override fun addReminder(reminder: Reminder?) {
-        if (reminder != null && isReminderValid(reminder)) {
 
-            _reminderViewModel.saveReminder(reminder)
 
-            systemService.setAlarm(reminder.alarmTimeInMillis)
+        _reminderViewModel.saveReminder(reminder!!)
 
-        }
+        systemService.setAlarm(reminder.alarmTimeInMillis)
+
+
     }
 
 

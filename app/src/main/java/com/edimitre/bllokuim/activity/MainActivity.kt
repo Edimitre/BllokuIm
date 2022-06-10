@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity(), AddUserForm.AddUserListener {
             loadSettings()
         }
 
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

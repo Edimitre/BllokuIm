@@ -69,13 +69,22 @@ class AddReminderForm : BottomSheetDialogFragment() {
 
             if (inputIsOk()) {
 
+                val threeSeconds = 3 * 1000
                 val timeInMillis =
                     TimeUtils().getTimeInMilliSeconds(year!!, month!!, date!!, hour!!, minutes!!)
                 val description = reminder_description_input.text.toString()
-                val reminder = Reminder(0, timeInMillis, description, true)
-                listener!!.addReminder(reminder)
+                val reminder = Reminder(0, timeInMillis+threeSeconds, description, true)
 
-                dismiss()
+                // verify reminder
+                if (isReminderValid(reminder)){
+                    listener!!.addReminder(reminder)
+
+                    dismiss()
+                }else{
+                    Toast.makeText(activity, "Data e zgjedhur nuk pershtatet me oren e zgjedhur \n" +
+                            "por eshte plus nje ose me shume dite \nju lutem verifikoni perseri te dhenat", Toast.LENGTH_LONG).show()
+                }
+
             }
 
         }
@@ -83,6 +92,12 @@ class AddReminderForm : BottomSheetDialogFragment() {
         btn_close_reminder_dialog.setOnClickListener {
             dismiss()
         }
+    }
+
+    private fun isReminderValid(reminder: Reminder): Boolean {
+
+        return reminder.alarmTimeInMillis >= System.currentTimeMillis()
+
     }
 
     private fun openDatePicker() {

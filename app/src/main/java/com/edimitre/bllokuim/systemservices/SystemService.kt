@@ -70,6 +70,12 @@ class SystemService(private val context: Context) {
                 alarmTime,
                 pendingIntent
             )
+        }else{
+            alarmManager.setExact(
+                AlarmManager.RTC,
+                alarmTime,
+                pendingIntent
+            )
         }
     }
 
